@@ -2,10 +2,19 @@ import { useFonts } from 'expo-font';
 import { ActivityIndicator, View } from 'react-native';
 import { Provider } from 'react-redux';
 import { store } from './store/index.js';
-
+import { init } from './db';
 import AppNavigator from './navigation';
 import { theme } from './constants';
 import { styles } from './styles';
+
+init()
+  .then(() => {
+    console.log('Base de datos inicializada exitosamente.');
+  })
+  .catch((err) => {
+    console.log('Inicialización de base de datos fallida.');
+    console.log(err);
+  });
 
 export default function App() {
   const [loaded] = useFonts({
